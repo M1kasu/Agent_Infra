@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "checks": {
+    "account_unlocked": true,
+    "application_accessible": true
+  },
+  "observed": {
+    "identity": {
+      "username": "alice",
+      "display_name": "Alice",
+      "employment_status": "active",
+      "active": true,
+      "locked": false
+    },
+    "access": {
+      "accessible": true,
+      "reasons": []
+    }
+  },
+  "reason": "account state and functional access both recovered"
+}

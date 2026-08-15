@@ -1,0 +1,4 @@
+interface:
+  display_name: "Access Diagnosis"
+  short_description: "Diagnose SaaS access from structured evidence"
+  default_prompt: "Use $access-diagnosis to identify the safest evidence-backed root cause and next action."

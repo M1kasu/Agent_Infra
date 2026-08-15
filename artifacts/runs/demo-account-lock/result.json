@@ -1,0 +1,9 @@
+{
+  "task_id": "demo-account-lock",
+  "trace_id": "trace-4160112a6fd4482291a8900fa3fa3752",
+  "status": "COMPLETED",
+  "root_cause": "account_locked",
+  "message": "检测到账号因连续认证失败被锁定，已完成解锁并重新验证 Docs 访问，当前访问已恢复。",
+  "attempts": 1,
+  "artifact_dir": "E:\\code\\InferPilot\\artifacts\\runs\\demo-account-lock"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Account Remediation"
+  short_description: "Execute policy-gated account unlock operations"
+  default_prompt: "Use $account-remediation to unlock an account only after an account-locked diagnosis."

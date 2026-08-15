@@ -1,0 +1,65 @@
+{
+  "employee": {
+    "username": "alice",
+    "display_name": "Alice",
+    "employment_status": "active"
+  },
+  "identity": {
+    "active": true,
+    "locked": true
+  },
+  "vpn": {
+    "enabled": true
+  },
+  "permissions": [
+    "docs"
+  ],
+  "services": {
+    "docs": {
+      "status": "healthy"
+    }
+  },
+  "access": {
+    "accessible": false,
+    "reasons": [
+      "account_locked"
+    ]
+  },
+  "evidence": [
+    {
+      "source": "IAMTool",
+      "fact": "identity_active",
+      "value": true
+    },
+    {
+      "source": "IAMTool",
+      "fact": "account_locked",
+      "value": true
+    },
+    {
+      "source": "VPNTool",
+      "fact": "vpn_enabled",
+      "value": true
+    },
+    {
+      "source": "ApplicationTool",
+      "fact": "permission_exists",
+      "value": true
+    },
+    {
+      "source": "ServiceHealthTool",
+      "fact": "service_status",
+      "value": "healthy"
+    },
+    {
+      "source": "ApplicationTool",
+      "fact": "access_probe",
+      "value": {
+        "accessible": false,
+        "reasons": [
+          "account_locked"
+        ]
+      }
+    }
+  ]
+}
