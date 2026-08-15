@@ -1,0 +1,4 @@
+interface:
+  display_name: "Employee Context"
+  short_description: "Collect structured enterprise access evidence"
+  default_prompt: "Use $employee-context to collect structured evidence for an employee SaaS access incident."

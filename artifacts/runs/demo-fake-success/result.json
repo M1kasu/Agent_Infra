@@ -1,0 +1,9 @@
+{
+  "task_id": "demo-fake-success",
+  "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+  "status": "FAILED",
+  "root_cause": "account_locked",
+  "message": "解锁工具返回成功，但验证发现账号仍被锁定或 Docs 仍不可访问；重试后任务已失败，未关闭事件。",
+  "attempts": 2,
+  "artifact_dir": "E:\\code\\InferPilot\\artifacts\\runs\\demo-fake-success"
+}

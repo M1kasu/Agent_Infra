@@ -1,0 +1,591 @@
+{
+  "task_id": "demo-fake-success",
+  "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+  "status": "FAILED",
+  "input": {
+    "user": "alice",
+    "application": "docs",
+    "statement": "我突然打不开公司 Docs 了，昨天还能用。"
+  },
+  "context": {
+    "employee": {
+      "username": "alice",
+      "display_name": "Alice",
+      "employment_status": "active"
+    },
+    "identity": {
+      "active": true,
+      "locked": true
+    },
+    "vpn": {
+      "enabled": true
+    },
+    "permissions": [
+      "docs"
+    ],
+    "services": {
+      "docs": {
+        "status": "healthy"
+      }
+    },
+    "access": {
+      "accessible": false,
+      "reasons": [
+        "account_locked"
+      ]
+    },
+    "evidence": [
+      {
+        "source": "IAMTool",
+        "fact": "identity_active",
+        "value": true
+      },
+      {
+        "source": "IAMTool",
+        "fact": "account_locked",
+        "value": true
+      },
+      {
+        "source": "VPNTool",
+        "fact": "vpn_enabled",
+        "value": true
+      },
+      {
+        "source": "ApplicationTool",
+        "fact": "permission_exists",
+        "value": true
+      },
+      {
+        "source": "ServiceHealthTool",
+        "fact": "service_status",
+        "value": "healthy"
+      },
+      {
+        "source": "ApplicationTool",
+        "fact": "access_probe",
+        "value": {
+          "accessible": false,
+          "reasons": [
+            "account_locked"
+          ]
+        }
+      }
+    ]
+  },
+  "diagnosis": {
+    "root_cause": "account_locked",
+    "confidence": 0.96,
+    "evidence": [
+      {
+        "source": "IAMTool",
+        "fact": "account_locked",
+        "value": true
+      },
+      {
+        "source": "VPNTool",
+        "fact": "vpn_enabled",
+        "value": true
+      },
+      {
+        "source": "ApplicationTool",
+        "fact": "permission_exists",
+        "value": true
+      },
+      {
+        "source": "ServiceHealthTool",
+        "fact": "service_status",
+        "value": "healthy"
+      }
+    ],
+    "recommended_action": "unlock_account"
+  },
+  "plan": [
+    "collect multi-source enterprise context",
+    "diagnose root cause from evidence",
+    "execute policy-gated remediation",
+    "re-read state and verify functional access"
+  ],
+  "execution": [
+    {
+      "action": "unlock_account",
+      "attempt": 1,
+      "tool_success": true,
+      "response": {
+        "success": true,
+        "operation": "unlock_account",
+        "user": "alice"
+      }
+    },
+    {
+      "action": "unlock_account",
+      "attempt": 2,
+      "tool_success": true,
+      "response": {
+        "success": true,
+        "operation": "unlock_account",
+        "user": "alice"
+      }
+    }
+  ],
+  "verification": {
+    "success": false,
+    "checks": {
+      "account_unlocked": false,
+      "application_accessible": false
+    },
+    "observed": {
+      "identity": {
+        "username": "alice",
+        "display_name": "Alice",
+        "employment_status": "active",
+        "active": true,
+        "locked": true
+      },
+      "access": {
+        "accessible": false,
+        "reasons": [
+          "account_locked"
+        ]
+      }
+    },
+    "reason": "tool reported success, but observed enterprise state did not recover"
+  },
+  "trace": [
+    {
+      "timestamp": "2026-08-14T23:52:25.263294+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "task_received",
+      "agent": "Manager Agent",
+      "input": {
+        "user": "alice",
+        "application": "docs",
+        "statement": "我突然打不开公司 Docs 了，昨天还能用。"
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.263637+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "state_transition",
+      "agent": "Manager Agent",
+      "previous": "RECEIVED",
+      "current": "COLLECTING_CONTEXT"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.263662+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Context Agent",
+      "skill": "EmployeeContextSkill",
+      "tool": "IAMTool",
+      "operation": "get_user",
+      "request": {
+        "user": "alice"
+      },
+      "response": {
+        "username": "alice",
+        "display_name": "Alice",
+        "employment_status": "active",
+        "active": true,
+        "locked": true
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.263877+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Context Agent",
+      "skill": "EmployeeContextSkill",
+      "tool": "VPNTool",
+      "operation": "get_vpn_status",
+      "request": {
+        "user": "alice"
+      },
+      "response": {
+        "enabled": true
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.264114+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Context Agent",
+      "skill": "EmployeeContextSkill",
+      "tool": "ApplicationTool",
+      "operation": "get_permissions",
+      "request": {
+        "user": "alice"
+      },
+      "response": {
+        "permissions": [
+          "docs"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.264291+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Context Agent",
+      "skill": "EmployeeContextSkill",
+      "tool": "ServiceHealthTool",
+      "operation": "get_app_health",
+      "request": {
+        "app": "docs"
+      },
+      "response": {
+        "status": "healthy"
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.264540+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Context Agent",
+      "skill": "EmployeeContextSkill",
+      "tool": "ApplicationTool",
+      "operation": "check_access",
+      "request": {
+        "app": "docs",
+        "user": "alice"
+      },
+      "response": {
+        "accessible": false,
+        "reasons": [
+          "account_locked"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.265013+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "agent_result",
+      "agent": "Context Agent",
+      "result": "context_collected"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.265695+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "state_transition",
+      "agent": "Manager Agent",
+      "previous": "COLLECTING_CONTEXT",
+      "current": "DIAGNOSING"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.265750+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "agent_result",
+      "agent": "Diagnosis Agent",
+      "result": {
+        "root_cause": "account_locked",
+        "confidence": 0.96,
+        "evidence": [
+          {
+            "source": "IAMTool",
+            "fact": "account_locked",
+            "value": true
+          },
+          {
+            "source": "VPNTool",
+            "fact": "vpn_enabled",
+            "value": true
+          },
+          {
+            "source": "ApplicationTool",
+            "fact": "permission_exists",
+            "value": true
+          },
+          {
+            "source": "ServiceHealthTool",
+            "fact": "service_status",
+            "value": "healthy"
+          }
+        ],
+        "recommended_action": "unlock_account"
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.266121+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "state_transition",
+      "agent": "Manager Agent",
+      "previous": "DIAGNOSING",
+      "current": "EXECUTING"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.266155+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Remediation & Verification Agent",
+      "skill": "AccountRemediationSkill",
+      "tool": "IAMTool",
+      "operation": "unlock_account",
+      "request": {
+        "user": "alice",
+        "idempotency_key": "demo-fake-success:unlock:1"
+      },
+      "response": {
+        "success": true,
+        "operation": "unlock_account",
+        "user": "alice"
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.266444+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "agent_result",
+      "agent": "Remediation & Verification Agent",
+      "result": {
+        "action": "unlock_account",
+        "attempt": 1,
+        "tool_success": true,
+        "response": {
+          "success": true,
+          "operation": "unlock_account",
+          "user": "alice"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.266456+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "state_transition",
+      "agent": "Manager Agent",
+      "previous": "EXECUTING",
+      "current": "VERIFYING"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.266479+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Remediation & Verification Agent",
+      "skill": "AccessVerificationSkill",
+      "tool": "IAMTool",
+      "operation": "get_user",
+      "request": {
+        "user": "alice"
+      },
+      "response": {
+        "username": "alice",
+        "display_name": "Alice",
+        "employment_status": "active",
+        "active": true,
+        "locked": true
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.266803+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Remediation & Verification Agent",
+      "skill": "AccessVerificationSkill",
+      "tool": "ApplicationTool",
+      "operation": "check_access",
+      "request": {
+        "app": "docs",
+        "user": "alice"
+      },
+      "response": {
+        "accessible": false,
+        "reasons": [
+          "account_locked"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267042+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "verification",
+      "agent": "Remediation & Verification Agent",
+      "result": {
+        "success": false,
+        "checks": {
+          "account_unlocked": false,
+          "application_accessible": false
+        },
+        "observed": {
+          "identity": {
+            "username": "alice",
+            "display_name": "Alice",
+            "employment_status": "active",
+            "active": true,
+            "locked": true
+          },
+          "access": {
+            "accessible": false,
+            "reasons": [
+              "account_locked"
+            ]
+          }
+        },
+        "reason": "tool reported success, but observed enterprise state did not recover"
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267055+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "state_transition",
+      "agent": "Manager Agent",
+      "previous": "VERIFYING",
+      "current": "RETRYING"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267059+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "state_transition",
+      "agent": "Manager Agent",
+      "previous": "RETRYING",
+      "current": "EXECUTING"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267076+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Remediation & Verification Agent",
+      "skill": "AccountRemediationSkill",
+      "tool": "IAMTool",
+      "operation": "unlock_account",
+      "request": {
+        "user": "alice",
+        "idempotency_key": "demo-fake-success:unlock:2"
+      },
+      "response": {
+        "success": true,
+        "operation": "unlock_account",
+        "user": "alice"
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267276+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "agent_result",
+      "agent": "Remediation & Verification Agent",
+      "result": {
+        "action": "unlock_account",
+        "attempt": 2,
+        "tool_success": true,
+        "response": {
+          "success": true,
+          "operation": "unlock_account",
+          "user": "alice"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267284+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "state_transition",
+      "agent": "Manager Agent",
+      "previous": "EXECUTING",
+      "current": "VERIFYING"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267298+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Remediation & Verification Agent",
+      "skill": "AccessVerificationSkill",
+      "tool": "IAMTool",
+      "operation": "get_user",
+      "request": {
+        "user": "alice"
+      },
+      "response": {
+        "username": "alice",
+        "display_name": "Alice",
+        "employment_status": "active",
+        "active": true,
+        "locked": true
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267547+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "tool_call",
+      "agent": "Remediation & Verification Agent",
+      "skill": "AccessVerificationSkill",
+      "tool": "ApplicationTool",
+      "operation": "check_access",
+      "request": {
+        "app": "docs",
+        "user": "alice"
+      },
+      "response": {
+        "accessible": false,
+        "reasons": [
+          "account_locked"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267756+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "verification",
+      "agent": "Remediation & Verification Agent",
+      "result": {
+        "success": false,
+        "checks": {
+          "account_unlocked": false,
+          "application_accessible": false
+        },
+        "observed": {
+          "identity": {
+            "username": "alice",
+            "display_name": "Alice",
+            "employment_status": "active",
+            "active": true,
+            "locked": true
+          },
+          "access": {
+            "accessible": false,
+            "reasons": [
+              "account_locked"
+            ]
+          }
+        },
+        "reason": "tool reported success, but observed enterprise state did not recover"
+      }
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.267766+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "state_transition",
+      "agent": "Manager Agent",
+      "previous": "VERIFYING",
+      "current": "FAILED"
+    },
+    {
+      "timestamp": "2026-08-14T23:52:25.268074+00:00",
+      "task_id": "demo-fake-success",
+      "trace_id": "trace-1f9b3cb297f94ab691d357bca4121517",
+      "event_type": "task_finished",
+      "agent": "Manager Agent",
+      "status": "FAILED"
+    }
+  ]
+}

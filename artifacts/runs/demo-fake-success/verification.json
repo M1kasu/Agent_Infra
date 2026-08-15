@@ -1,0 +1,23 @@
+{
+  "success": false,
+  "checks": {
+    "account_unlocked": false,
+    "application_accessible": false
+  },
+  "observed": {
+    "identity": {
+      "username": "alice",
+      "display_name": "Alice",
+      "employment_status": "active",
+      "active": true,
+      "locked": true
+    },
+    "access": {
+      "accessible": false,
+      "reasons": [
+        "account_locked"
+      ]
+    }
+  },
+  "reason": "tool reported success, but observed enterprise state did not recover"
+}

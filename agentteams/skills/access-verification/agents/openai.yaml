@@ -1,0 +1,4 @@
+interface:
+  display_name: "Access Verification"
+  short_description: "Verify identity state and functional SaaS access"
+  default_prompt: "Use $access-verification to independently confirm that remediation truly restored access."

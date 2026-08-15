@@ -1,0 +1,27 @@
+{
+  "root_cause": "account_locked",
+  "confidence": 0.96,
+  "evidence": [
+    {
+      "source": "IAMTool",
+      "fact": "account_locked",
+      "value": true
+    },
+    {
+      "source": "VPNTool",
+      "fact": "vpn_enabled",
+      "value": true
+    },
+    {
+      "source": "ApplicationTool",
+      "fact": "permission_exists",
+      "value": true
+    },
+    {
+      "source": "ServiceHealthTool",
+      "fact": "service_status",
+      "value": "healthy"
+    }
+  ],
+  "recommended_action": "unlock_account"
+}
