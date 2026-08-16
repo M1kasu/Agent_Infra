@@ -82,6 +82,19 @@ Manager
 
 已有队友分支包含 AgentTeams、Matrix、角色隔离 MCP、4 个 Skill、Sandbox、Trace、Fake Success 和自动测试。它是通用架构的第一个验证切片，不代表 OfficeOps 只处理账号问题。验收不以单次脚本化运行为准：同一故障的输入变体集与同症异因 Case 纳入评测（见 10）。
 
+## 可执行初赛 Demo
+
+仓库现提供一份零第三方依赖的可执行 Demo，包含有状态 Mock Tool Gateway、正常恢复、Fake Success、完整运行证据、Web 演示页和 AgentTeams `Worker + TeamLeader + Team` 声明文件。
+
+```bash
+node demo/cli.mjs --mode normal
+node demo/cli.mjs --mode fake_success
+node demo/server.mjs
+node --test demo/tests/*.test.mjs
+```
+
+浏览器演示地址为 `http://localhost:18110`。详细运行、AgentTeams 接入和 Vercel 语义见 [demo/README.md](demo/README.md)。
+
 ## 核心设计原则
 
 1. **先统一概念，再接厂商系统**：厂商字段留在 Adapter，核心模型保持稳定。
@@ -110,6 +123,7 @@ Manager
 | 09 | [Security Design](docs/09-security-design.md) | 最小权限、审批、补偿与审计 | ✅ v0.2 |
 | 10 | [Evaluation Plan](docs/10-evaluation-plan.md) | 指标、Golden Cases 和验收 Gate | ✅ v0.2 |
 | 11 | [Demo Script](docs/11-demo-script.md) | Docs 账号锁定 Demo 分镜 | ✅ v0.2 |
+| 12 | [Executable Demo & Vercel](docs/12-executable-demo-and-vercel.md) | 代码包、本地验收与在线部署 | ✅ demo 0.1 |
 
 ## 阶段 Gate
 

@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "case_id": "G01",
+      "mode": "normal",
+      "expected_status": "COMPLETED",
+      "expected_root_cause": "account_locked",
+      "expected_verification": "PASS"
+    },
+    {
+      "case_id": "G07",
+      "mode": "fake_success",
+      "expected_status": "FAILED",
+      "expected_root_cause": "account_locked",
+      "expected_tool_status": "SUCCEEDED",
+      "expected_verification": "FAIL"
+    }
+  ]
+}
+

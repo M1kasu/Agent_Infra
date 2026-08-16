@@ -1,0 +1,12 @@
+{
+  "status": "FAILED",
+  "root_cause": "account_locked",
+  "tool_status": "SUCCEEDED",
+  "execution_status": "SUCCEEDED",
+  "verification_status": "FAIL",
+  "required_observed_state": {
+    "account_locked": true,
+    "docs_accessible": false
+  }
+}
+

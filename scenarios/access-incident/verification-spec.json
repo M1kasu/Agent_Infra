@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "spec_id": "access-restored",
+  "version": "0.1.0",
+  "freshness_required": true,
+  "assertions": [
+    {
+      "assertion_id": "account-unlocked",
+      "fact": "iam.account.locked",
+      "operator": "equals",
+      "expected": false
+    },
+    {
+      "assertion_id": "docs-accessible",
+      "fact": "docs.accessible",
+      "operator": "equals",
+      "expected": true
+    }
+  ]
+}
+

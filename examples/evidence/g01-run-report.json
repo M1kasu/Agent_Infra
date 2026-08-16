@@ -1,0 +1,71 @@
+{
+  "sample_type": "recorded_run_evidence",
+  "generated_by": "demo/lib/runner.mjs@0.1.0",
+  "result": {
+    "run_id": "sample-g01",
+    "mode": "normal",
+    "status": "COMPLETED",
+    "root_cause": "account_locked",
+    "tool_status": "SUCCEEDED",
+    "execution_status": "SUCCEEDED",
+    "verification_status": "PASS"
+  },
+  "diagnosis": {
+    "status": "CONFIRMED",
+    "confidence": 0.97,
+    "rejected_hypotheses": [
+      "permission_missing",
+      "vpn_disabled",
+      "service_unhealthy"
+    ],
+    "evidence_ids": [
+      "ev-sample-g01-001",
+      "ev-sample-g01-002",
+      "ev-sample-g01-003",
+      "ev-sample-g01-004",
+      "ev-sample-g01-005",
+      "ev-sample-g01-006"
+    ]
+  },
+  "policy": {
+    "decision": "AUTO_ALLOW",
+    "risk_level": "L1",
+    "matched_rule": "allow-normal-user-auto-unlock"
+  },
+  "tool_chain": [
+    "context-agent:iam.get_subject:SUCCEEDED",
+    "context-agent:iam.get_account_state:SUCCEEDED",
+    "context-agent:vpn.get_state:SUCCEEDED",
+    "context-agent:docs.get_effective_permissions:SUCCEEDED",
+    "context-agent:docs.get_service_health:SUCCEEDED",
+    "context-agent:docs.probe_access:SUCCEEDED",
+    "execution-agent:iam.unlock_account:SUCCEEDED",
+    "verification-agent:iam.get_account_state:SUCCEEDED",
+    "verification-agent:docs.probe_access:SUCCEEDED"
+  ],
+  "verification": {
+    "status": "PASS",
+    "fresh_observation_required": true,
+    "observed": {
+      "account_locked": false,
+      "docs_accessible": true
+    },
+    "assertions": [
+      { "id": "account-unlocked", "passed": true, "evidence_id": "ev-sample-g01-008" },
+      { "id": "docs-accessible", "passed": true, "evidence_id": "ev-sample-g01-009" }
+    ]
+  },
+  "trace_summary": {
+    "event_count": 20,
+    "agents": [
+      "officeops-team-leader",
+      "context-agent",
+      "diagnosis-planning-agent",
+      "policy-engine",
+      "execution-agent",
+      "verification-agent"
+    ],
+    "terminal_stage": "COMPLETED"
+  }
+}
+

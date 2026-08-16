@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://officeops.dev/schemas/tool-call.schema.json",
+  "title": "OfficeOps ToolCall",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "tool_call_id",
+    "run_id",
+    "actor",
+    "operation",
+    "status",
+    "requested_at",
+    "observed_at",
+    "evidence_id"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "tool_call_id": { "type": "string" },
+    "run_id": { "type": "string" },
+    "actor": { "type": "string" },
+    "operation": { "type": "string" },
+    "target_ref": { "type": ["string", "null"] },
+    "status": { "enum": ["SUCCEEDED", "FAILED", "UNKNOWN"] },
+    "requested_at": { "type": "string", "format": "date-time" },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "data": {},
+    "evidence_id": { "type": "string" }
+  },
+  "additionalProperties": true
+}
+

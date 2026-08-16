@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://officeops.dev/schemas/work-item.schema.json",
+  "title": "OfficeOps WorkItem",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "work_item_id",
+    "type",
+    "source_channel",
+    "requester",
+    "description",
+    "status",
+    "scenario_candidates"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "work_item_id": { "type": "string", "minLength": 1 },
+    "type": {
+      "enum": ["INCIDENT", "SERVICE_REQUEST", "CHANGE", "ALERT", "LIFECYCLE_EVENT"]
+    },
+    "source_channel": { "type": "string", "minLength": 1 },
+    "requester": { "$ref": "#/$defs/entityRef" },
+    "affected_subjects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entityRef" }
+    },
+    "title": { "type": "string" },
+    "description": { "type": "string", "minLength": 1 },
+    "impact": { "enum": ["SINGLE_USER", "TEAM", "SITE", "ENTERPRISE"] },
+    "urgency": { "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"] },
+    "status": { "type": "string" },
+    "scenario_candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["scenario_id", "confidence", "basis"],
+        "properties": {
+          "scenario_id": { "type": "string" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "basis": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "entityRef": {
+      "type": "object",
+      "required": ["entity_type", "entity_id"],
+      "properties": {
+        "entity_type": { "type": "string" },
+        "entity_id": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}
+

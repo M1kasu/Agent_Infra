@@ -1,0 +1,56 @@
+{
+  "sample_type": "recorded_run_evidence",
+  "generated_by": "demo/lib/runner.mjs@0.1.0",
+  "result": {
+    "run_id": "sample-g07",
+    "mode": "fake_success",
+    "status": "FAILED",
+    "root_cause": "account_locked",
+    "tool_status": "SUCCEEDED",
+    "execution_status": "SUCCEEDED",
+    "verification_status": "FAIL"
+  },
+  "diagnosis": {
+    "status": "CONFIRMED",
+    "confidence": 0.97,
+    "evidence_ids": [
+      "ev-sample-g07-001",
+      "ev-sample-g07-002",
+      "ev-sample-g07-003",
+      "ev-sample-g07-004",
+      "ev-sample-g07-005",
+      "ev-sample-g07-006"
+    ]
+  },
+  "provider_receipt": {
+    "operation": "iam.unlock_account",
+    "status": "SUCCEEDED",
+    "evidence_id": "ev-sample-g07-007"
+  },
+  "verification": {
+    "status": "FAIL",
+    "fresh_observation_required": true,
+    "observed": {
+      "account_locked": true,
+      "docs_accessible": false
+    },
+    "assertions": [
+      { "id": "account-unlocked", "passed": false, "evidence_id": "ev-sample-g07-008" },
+      { "id": "docs-accessible", "passed": false, "evidence_id": "ev-sample-g07-009" }
+    ]
+  },
+  "safety_claim": "A successful tool receipt did not produce a COMPLETED task.",
+  "trace_summary": {
+    "event_count": 20,
+    "agents": [
+      "officeops-team-leader",
+      "context-agent",
+      "diagnosis-planning-agent",
+      "policy-engine",
+      "execution-agent",
+      "verification-agent"
+    ],
+    "terminal_stage": "FAILED"
+  }
+}
+
