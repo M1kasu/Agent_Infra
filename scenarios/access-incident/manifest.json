@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "access-incident",
+  "version": "0.1.0",
+  "name": "Enterprise SaaS access incident",
+  "owner": "OfficeOps",
+  "status": "demo",
+  "work_item_types": ["INCIDENT"],
+  "required_agents": [
+    "officeops-team-leader",
+    "context-agent",
+    "diagnosis-planning-agent",
+    "execution-agent",
+    "verification-agent"
+  ],
+  "skills": [
+    "normalize-and-route",
+    "collect-access-context",
+    "diagnose-access-incident",
+    "execute-controlled-action",
+    "verify-access-outcome"
+  ],
+  "read_capabilities": [
+    "iam.get_subject",
+    "iam.get_account_state",
+    "vpn.get_state",
+    "docs.get_effective_permissions",
+    "docs.get_service_health",
+    "docs.probe_access"
+  ],
+  "write_capabilities": ["iam.unlock_account"],
+  "risk_policy": "policy.json",
+  "verification_spec": "verification-spec.json",
+  "golden_cases": "golden-cases.json"
+}
+

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="OfficeOps Agent 企业数字办公 IT 多 Agent 协同演示">
+    <title>OfficeOps Agent · Access Incident Demo</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#demo-result">跳到运行结果</a>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="OfficeOps 首页">
+        <span class="brand-mark" aria-hidden="true">OO</span>
+        <span>
+          <strong>OfficeOps Agent</strong>
+          <small>Enterprise IT task infrastructure</small>
+        </span>
+      </a>
+      <div class="topbar-meta">
+        <span class="release-tag">INITIAL DEMO · 0.1</span>
+        <span class="api-status" id="api-status"><i></i> CHECKING</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero shell" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">AGENT INFRA / ACCESS INCIDENT</p>
+          <h1 id="page-title">回答不是终点，<br><span>恢复才是。</span></h1>
+          <p class="hero-lead">
+            一个面向企业数字办公 IT 的多 Agent 闭环。系统跨 IAM、VPN、权限与应用状态取证，
+            受控执行后再独立验证，不让工具回执替代用户问题的真实恢复。
+          </p>
+          <div class="principle-row" aria-label="核心原则">
+            <span>Evidence first</span>
+            <span>Least privilege</span>
+            <span>Independent verification</span>
+          </div>
+        </div>
+
+        <aside class="case-card" aria-label="演示案例">
+          <div class="case-card-head">
+            <span class="case-number">CASE / G01 + G07</span>
+            <span class="severity">P3 · SINGLE USER</span>
+          </div>
+          <blockquote>“我的这个文档显示没有权限访问，无法打开。”</blockquote>
+          <div class="signal-stack">
+            <div><span>UI symptom</span><strong>Permission denied</strong></div>
+            <div><span>Evidence</span><strong>Identity locked</strong></div>
+            <div><span>Outcome</span><strong>Fresh access probe</strong></div>
+          </div>
+          <p>输入只描述症状，不预先提供故障分类或根因标签。</p>
+        </aside>
+      </section>
+
+      <section class="control-band" aria-labelledby="run-title">
+        <div class="shell control-layout">
+          <div>
+            <p class="eyebrow dark">RUN THE EVIDENCE CHAIN</p>
+            <h2 id="run-title">选择故障注入，观察终态差异</h2>
+          </div>
+          <form class="run-form" id="run-form">
+            <label class="sr-only" for="incident-message">员工报障内容</label>
+            <textarea id="incident-message" rows="2">我的这个文档显示没有权限访问，无法打开。</textarea>
+            <div class="run-actions">
+              <div class="mode-switch" role="group" aria-label="运行模式">
+                <button type="button" class="mode-button active" data-mode="normal">正常恢复</button>
+                <button type="button" class="mode-button" data-mode="fake_success">Fake Success</button>
+              </div>
+              <button class="run-button" id="run-button" type="submit">
+                <span>运行协作链路</span><b aria-hidden="true">→</b>
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="pipeline shell" aria-labelledby="pipeline-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">AGENTTEAMS MAPPING</p>
+            <h2 id="pipeline-title">一个 TeamLeader，四种受限职能</h2>
+          </div>
+          <p>认知环节由 Agent 决策；状态、策略、写入门禁与验证断言由代码约束。</p>
+        </div>
+
+        <ol class="agent-track" id="agent-track">
+          <li data-agent="officeops-team-leader">
+            <span class="agent-index">01</span>
+            <strong>TeamLeader</strong>
+            <small>Normalize · Route · Coordinate</small>
+          </li>
+          <li data-agent="context-agent">
+            <span class="agent-index">02</span>
+            <strong>Context</strong>
+            <small>Read-only evidence</small>
+          </li>
+          <li data-agent="diagnosis-planning-agent">
+            <span class="agent-index">03</span>
+            <strong>Diagnosis</strong>
+            <small>Evidence-backed plan</small>
+          </li>
+          <li data-agent="execution-agent">
+            <span class="agent-index">04</span>
+            <strong>Execution</strong>
+            <small>Frozen plan only</small>
+          </li>
+          <li data-agent="verification-agent">
+            <span class="agent-index">05</span>
+            <strong>Verification</strong>
+            <small>Fresh read · Probe</small>
+          </li>
+        </ol>
+      </section>
+
+      <section class="result-section shell" id="demo-result" aria-live="polite">
+        <div class="result-placeholder" id="result-placeholder">
+          <span class="pulse-ring" aria-hidden="true"></span>
+          <h2>等待运行</h2>
+          <p>点击“运行协作链路”，查看完整 Artifact、ToolCall、Evidence 和 Trace。</p>
+        </div>
+
+        <div class="result-content hidden" id="result-content">
+          <div class="result-header">
+            <div>
+              <p class="eyebrow">RUN OUTCOME</p>
+              <h2 id="result-title">—</h2>
+              <p id="result-message">—</p>
+            </div>
+            <div class="run-identity">
+              <span>RUN ID</span>
+              <code id="run-id">—</code>
+            </div>
+          </div>
+
+          <div class="metric-grid">
+            <article><span>Task status</span><strong id="metric-task">—</strong></article>
+            <article><span>Root cause</span><strong id="metric-root">—</strong></article>
+            <article><span>Tool status</span><strong id="metric-tool">—</strong></article>
+            <article><span>Verification</span><strong id="metric-verify">—</strong></article>
+          </div>
+
+          <div class="detail-grid">
+            <article class="panel evidence-panel">
+              <div class="panel-head">
+                <div><span>CONTEXT SNAPSHOT</span><h3>多源事实</h3></div>
+                <small id="evidence-count">0 evidence</small>
+              </div>
+              <div class="observation-list" id="observation-list"></div>
+            </article>
+
+            <article class="panel verification-panel">
+              <div class="panel-head">
+                <div><span>SEMANTIC CHECK</span><h3>独立验证</h3></div>
+                <small>fresh observation</small>
+              </div>
+              <div id="assertion-list" class="assertion-list"></div>
+              <div class="truth-table">
+                <div><span>Tool receipt</span><strong id="truth-tool">—</strong></div>
+                <b aria-hidden="true">≠</b>
+                <div><span>Task outcome</span><strong id="truth-task">—</strong></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="detail-grid lower-grid">
+            <article class="panel trace-panel">
+              <div class="panel-head">
+                <div><span>TRACE</span><h3>协作与状态时间线</h3></div>
+                <small id="trace-count">0 events</small>
+              </div>
+              <ol class="trace-list" id="trace-list"></ol>
+            </article>
+
+            <article class="panel artifact-panel">
+              <div class="panel-head">
+                <div><span>ARTIFACT INSPECTOR</span><h3>结构化交接</h3></div>
+                <small>schema v1.0</small>
+              </div>
+              <div class="artifact-tabs" id="artifact-tabs" role="tablist"></div>
+              <pre id="artifact-json" tabindex="0"><code>{}</code></pre>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="shell footer-layout">
+        <div><strong>OfficeOps Agent</strong><span>Core · Scenario Pack · Adapter</span></div>
+        <p>Mock Sandbox · AgentTeams-compatible resources · No production credentials</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
+

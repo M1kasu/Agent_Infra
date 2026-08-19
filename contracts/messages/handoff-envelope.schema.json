@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://officeops.dev/schemas/handoff-envelope.schema.json",
+  "title": "OfficeOps Agent Handoff Envelope",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "message_id",
+    "run_id",
+    "task_id",
+    "sender",
+    "recipient",
+    "artifact_ref",
+    "artifact_hash",
+    "required_response_schema",
+    "trace_id",
+    "sent_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "message_id": { "type": "string" },
+    "run_id": { "type": "string" },
+    "task_id": { "type": "string" },
+    "causation_id": { "type": ["string", "null"] },
+    "sender": { "type": "string" },
+    "recipient": { "type": "string" },
+    "artifact_type": { "type": "string" },
+    "artifact_ref": { "type": "string" },
+    "artifact_hash": { "type": "string", "pattern": "^sha256:" },
+    "required_response_schema": { "type": "string" },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "deadline": { "type": ["string", "null"], "format": "date-time" },
+    "trace_id": { "type": "string" },
+    "sent_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}
+
